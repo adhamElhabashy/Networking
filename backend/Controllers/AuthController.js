@@ -1,3 +1,4 @@
+const User = require("../Models/UserModel");
 const asyncHandler = require("express-async-handler");
 /*---------------------------------
 * @desc sign up New User 
@@ -5,6 +6,10 @@ const asyncHandler = require("express-async-handler");
 * @method POST
 * @access public
 -----------------------------------*/
-module.exports.signup = (request, response) => {
-	return response.status(200).json({ message: "done" });
-};
+module.exports.signup = asyncHandler(async (request, response) => {
+	User.create(request.body);
+
+	return response
+		.status(201)
+		.json({ status: "success", message: "user has been created" });
+});
