@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 
 /*---------------------------------
 * @desc sign up New User 
-* @route /api/auth/signup
+* @route /api/v1/auth/signup
 * @method POST
 * @access public
 -----------------------------------*/
@@ -19,7 +19,7 @@ module.exports.signUp = asyncHandler(async (request, response) => {
 
 /*---------------------------------
 * @desc sign in user
-* @route /api/auth/signin
+* @route /api/v1/auth/signin
 * @method POST
 * @access public
 -----------------------------------*/
