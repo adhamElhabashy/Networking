@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const UsersController = require("../Controllers/UsersController");
-const { verifiyAdmin } = require("../Middlewares/VerifiyAdmin");
+const { VerifiyToken } = require("../Middlewares/VerifiyToken");
+const { VerifiyAdmin } = require("../Middlewares/VerifiyAdmin");
 
-router.route("/").get(verifiyAdmin, UsersController.getAllUsers);
+router.route("/").get(VerifiyToken, VerifiyAdmin, UsersController.getAllUsers);
 
 module.exports = router;
