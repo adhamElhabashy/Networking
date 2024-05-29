@@ -43,9 +43,13 @@ module.exports.signIn = asyncHandler(async (request, response) => {
 	}
 
 	// 3 - create token
-	const token = jwt.sign({ id: user._id }, process.env.PRIVATEKEY, {
-		expiresIn: process.env.LOGIN_EXPIRES,
-	});
+	const token = jwt.sign(
+		{ id: user._id, isAdmin: user.isAdmin },
+		process.env.PRIVATEKEY,
+		{
+			expiresIn: process.env.LOGIN_EXPIRES,
+		}
+	);
 
 	response.status(200).json({ status: "success", data: { user }, token });
 });
