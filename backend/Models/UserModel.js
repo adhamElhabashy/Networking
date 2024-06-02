@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
 	isAdmin: { type: Boolean, default: false },
 	profilePhoto: { type: String, default: "https://placehold.co/400" },
 	bio: { type: String, minlength: 10 },
+	active: { type: Boolean, default: true },
 	accountVerified: { type: Boolean },
 	passwordChangedAt: Date,
 	passwordResetToken: String,

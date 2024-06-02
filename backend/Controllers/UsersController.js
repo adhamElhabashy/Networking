@@ -30,13 +30,14 @@ module.exports.getAllUsers = asyncHandler(async (request, response) => {
 
 module.exports.UpdateMyProfile = asyncHandler(async (request, response) => {
 	const { id } = request.params;
-	// 1 - check if the id in the payload === the id in the url
+
 	if (request.user.id !== id) {
 		return response.status(401).json({
 			status: "fail",
-			message: "You are not allowed to update profile",
+			message: "Not Allowed",
 		});
 	}
+
 	// 2 - prevent updating of the password
 	if (request.body.password || request.body.confirmPassword) {
 		return response
@@ -57,4 +58,24 @@ module.exports.UpdateMyProfile = asyncHandler(async (request, response) => {
 	});
 	// 4 - send response
 	response.status(200).json({ status: "success", data: { user } });
+});
+
+/*---------------------------------
+* @desc delete user profile
+* @route /api/v1/users/:id
+* @method DELETE
+* @access private - only user himself or admin
+-----------------------------------*/
+module.exports.deleteUserProfile = asyncHandler(async (request, response) => {
+	const { id } = request.params;
+
+	if (request.user.id !== id && request.user.isAdmin !== true) {
+		return response.status(401).json({
+			status: "fail",
+			message: "Not Allowed",
+		});
+	}
+	await User.findByIdAndUpdate(id, { active: false });
+
+	response.status(204).json({ status: "success", data: null });
 });

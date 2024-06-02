@@ -5,6 +5,9 @@ const { verifyToken } = require("../Middlewares/VerifyToken");
 const { verifyAdmin } = require("../Middlewares/VerifyAdmin");
 
 router.route("/").get(verifyToken, verifyAdmin, UsersController.getAllUsers);
-router.route("/:id").put(verifyToken, UsersController.UpdateMyProfile);
+router
+	.route("/:id")
+	.put(verifyToken, UsersController.UpdateMyProfile)
+	.delete(verifyToken, UsersController.deleteUserProfile);
 
 module.exports = router;
