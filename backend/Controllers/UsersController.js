@@ -1,13 +1,7 @@
 const User = require("../Models/UserModel");
 const asyncHandler = require("express-async-handler");
 
-const filterRequestObject = (obj, ...allowedFields) => {
-	const newObj = {};
-	Object.keys(obj).forEach((prop) => {
-		if (allowedFields.includes(prop)) newObj[prop] = obj[prop];
-	});
-	return newObj;
-};
+const filterRequestObject = require("../Functions/FilterRequestObject");
 
 /*---------------------------------
 * @desc get all the users
