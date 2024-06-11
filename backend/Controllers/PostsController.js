@@ -58,3 +58,27 @@ module.exports.updateMyPost = asyncHandler(async (request, response) => {
 	});
 	response.status(200).json({ status: "success", post });
 });
+
+/*---------------------------------
+* @desc delete post
+* @route /api/v1/posts/:id
+* @method delete
+* @access private (only signed in user or admin)
+-----------------------------------*/
+module.exports.deleteProfile = asyncHandler(async (request, response) => {
+	const post = await Post.findOne({ _id: request.params.id });
+
+	if (
+		request.user.isAdmin !== true &&
+		request.user.id !== post.user.toString()
+	) {
+		response.status(403).json({
+			status: "fail",
+			message: "Not Allowed. only the user or admin can delete the post",
+		});
+	}
+
+	await Post.findByIdAndDelete(request.params.id);
+	// TODO: deleting all its comments in the database
+	response.status(200).json({ status: "success", data: null });
+});

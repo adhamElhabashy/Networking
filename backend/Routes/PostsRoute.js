@@ -13,6 +13,7 @@ router
 
 router
 	.route("/:id")
-	.put(verifyToken, Protect, verifyUserPost, PostsController.updateMyPost);
+	.put(verifyToken, Protect, verifyUserPost, PostsController.updateMyPost)
+	.delete(verifyToken, Protect, PostsController.deleteProfile);
 
 module.exports = router;
