@@ -70,6 +70,7 @@ module.exports.deleteUserProfile = asyncHandler(async (request, response) => {
 		});
 	}
 	await User.findByIdAndUpdate(id, { active: false });
+	// TODO: deleting all his Posts & comments in the database
 
 	response.status(204).json({ status: "success", data: null });
 });
