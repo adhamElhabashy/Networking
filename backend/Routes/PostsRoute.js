@@ -4,9 +4,15 @@ const PostsController = require("../Controllers/PostsController");
 const { verifyToken } = require("../Middlewares/VerifyToken");
 const { verifyAdmin } = require("../Middlewares/VerifyAdmin");
 const { Protect } = require("../Middlewares/Protect");
+const { verifyUserPost } = require("../Middlewares/verifyUserPost");
+
 router
 	.route("/")
 	.get(verifyToken, Protect, verifyAdmin, PostsController.getAllThePosts)
 	.post(verifyToken, PostsController.createPost);
+
+router
+	.route("/:id")
+	.put(verifyToken, Protect, verifyUserPost, PostsController.updateMyPost);
 
 module.exports = router;

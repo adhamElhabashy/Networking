@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const Post = require("../Models/PostModel");
 
+const filterRequestObject = require("../Functions/FilterRequestObject");
+
 /*---------------------------------
 * @desc create post
 * @route /api/v1/posts
@@ -35,4 +37,24 @@ module.exports.getAllThePosts = asyncHandler(async (request, response) => {
 	}
 
 	response.status(200).json({ status: "success", data: { posts } });
+});
+
+/*---------------------------------
+* @desc update post
+* @route /api/v1/posts/:id
+* @method put
+* @access private (only signed in user)
+-----------------------------------*/
+module.exports.updateMyPost = asyncHandler(async (request, response) => {
+	const filteredObject = filterRequestObject(
+		request.body,
+		"title",
+		"description",
+		"category"
+	);
+	const post = await Post.findByIdAndUpdate(request.params.id, filteredObject, {
+		runValidators: true,
+		new: true,
+	});
+	response.status(200).json({ status: "success", post });
 });
