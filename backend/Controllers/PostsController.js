@@ -21,8 +21,18 @@ module.exports.createPost = asyncHandler(async (request, response) => {
 * @access private (only admin)
 -----------------------------------*/
 module.exports.getAllThePosts = asyncHandler(async (request, response) => {
-	const posts = await Post.find();
-	// TODO: add pagination
-	// TODO: filter by category
+	let posts;
+	const { pageNumber, category } = request.query;
+	const postsPerPage = 3;
+	const filterCategory = category ? { category } : {};
+
+	if (pageNumber) {
+		posts = await Post.find(filterCategory)
+			.skip((+pageNumber - 1) * postsPerPage)
+			.limit(postsPerPage);
+	} else {
+		posts = await Post.find(filterCategory);
+	}
+
 	response.status(200).json({ status: "success", data: { posts } });
 });
