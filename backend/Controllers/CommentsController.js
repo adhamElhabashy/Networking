@@ -3,6 +3,18 @@ const asyncHandler = require("express-async-handler");
 const User = require("../Models/UserModel");
 
 /*---------------------------------
+* @desc get All the comments
+* @route /api/v1/comments
+* @method GET
+* @access private (only admin)
+-----------------------------------*/
+module.exports.getAllComments = asyncHandler(async (request, response) => {
+	const comments = await Comment.find().populate("user");
+
+	response.status(200).json({ status: "success", data: { comments } });
+});
+
+/*---------------------------------
 * @desc create comment
 * @route /api/v1/comments
 * @method POST
