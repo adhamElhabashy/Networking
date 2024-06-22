@@ -9,4 +9,8 @@ router
 	.get(verifyToken, Protect, verifyAdmin, CommentsController.getAllComments)
 	.post(verifyToken, Protect, CommentsController.createComment);
 
+router
+	.route("/:id")
+	.put(verifyToken, Protect, CommentsController.updateComment);
+
 module.exports = router;

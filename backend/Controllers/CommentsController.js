@@ -1,6 +1,7 @@
 const Comment = require("../Models/CommentModel");
 const asyncHandler = require("express-async-handler");
 const User = require("../Models/UserModel");
+const FilterRequestObject = require("../Functions/FilterRequestObject");
 
 /*---------------------------------
 * @desc get All the comments
@@ -29,6 +30,26 @@ module.exports.createComment = asyncHandler(async (request, response) => {
 		user: request.user.id,
 		username: profile.username,
 	});
+
+	response.status(201).json({ status: "success", data: { comment } });
+});
+
+/*---------------------------------
+* @desc create comment
+* @route /api/v1/comments
+* @method POST
+* @access private (only logged in user)
+-----------------------------------*/
+module.exports.updateComment = asyncHandler(async (request, response) => {
+	const filteredObject = FilterRequestObject(request.body, "text");
+	const comment = await Comment.findByIdAndUpdate(
+		request.params.id,
+		filteredObject,
+		{
+			runValidators: true,
+			new: true,
+		}
+	);
 
 	response.status(201).json({ status: "success", data: { comment } });
 });
