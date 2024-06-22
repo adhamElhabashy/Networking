@@ -35,9 +35,9 @@ module.exports.createComment = asyncHandler(async (request, response) => {
 });
 
 /*---------------------------------
-* @desc create comment
+* @desc update comment
 * @route /api/v1/comments
-* @method POST
+* @method PUT
 * @access private (only logged in user)
 -----------------------------------*/
 module.exports.updateComment = asyncHandler(async (request, response) => {
@@ -51,5 +51,5 @@ module.exports.updateComment = asyncHandler(async (request, response) => {
 		}
 	);
 
-	response.status(201).json({ status: "success", data: { comment } });
+	response.status(200).json({ status: "success", data: { comment } });
 });
