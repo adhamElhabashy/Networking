@@ -53,3 +53,27 @@ module.exports.updateComment = asyncHandler(async (request, response) => {
 
 	response.status(200).json({ status: "success", data: { comment } });
 });
+
+/*---------------------------------
+* @desc delete comment
+* @route /api/v1/comments
+* @method DELETE
+* @access private (only admin or logged in user)
+-----------------------------------*/
+module.exports.deleteComment = asyncHandler(async (request, response) => {
+	const comment = await Comment.findById(request.params.id);
+
+	if (
+		request.user.isAdmin !== true &&
+		request.user.id !== comment.user.toString()
+	) {
+		response.status(403).json({
+			status: "fail",
+			message: "Not Allowed. only the user or admin can delete the post",
+		});
+	}
+
+	await Comment.findByIdAndDelete(request.params.id);
+
+	response.status(200).json({ status: "success", data: null });
+});

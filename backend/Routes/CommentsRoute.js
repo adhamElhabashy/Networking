@@ -11,6 +11,7 @@ router
 
 router
 	.route("/:id")
-	.put(verifyToken, Protect, CommentsController.updateComment);
+	.put(verifyToken, Protect, CommentsController.updateComment)
+	.delete(verifyToken, Protect, CommentsController.deleteComment);
 
 module.exports = router;
