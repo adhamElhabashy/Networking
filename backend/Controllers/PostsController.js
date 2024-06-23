@@ -40,6 +40,24 @@ module.exports.getAllThePosts = asyncHandler(async (request, response) => {
 });
 
 /*---------------------------------
+* @desc get single post
+* @route /api/v1/posts
+* @method GET
+* @access private (only admin)
+-----------------------------------*/
+module.exports.getSinglePost = asyncHandler(async (request, response) => {
+	const post = await Post.findById(request.params.id)
+		.populate("user", ["-password"])
+		.populate("comments");
+
+	if (!post) {
+		response.status(404).json({ status: "fail", message: "post not found" });
+	}
+
+	response.status(200).json({ status: "success", data: { post } });
+});
+
+/*---------------------------------
 * @desc update post
 * @route /api/v1/posts/:id
 * @method put

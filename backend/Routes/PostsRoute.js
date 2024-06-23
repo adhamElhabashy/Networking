@@ -13,6 +13,7 @@ router
 
 router
 	.route("/:id")
+	.get(verifyToken, Protect, PostsController.getSinglePost)
 	.put(verifyToken, Protect, verifyUserPost, PostsController.updateMyPost)
 	.delete(verifyToken, Protect, PostsController.deleteProfile);
 
