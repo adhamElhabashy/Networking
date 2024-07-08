@@ -60,7 +60,7 @@ module.exports.getSinglePost = asyncHandler(async (request, response) => {
 /*---------------------------------
 * @desc update post
 * @route /api/v1/posts/:id
-* @method put
+* @method PUT
 * @access private (only signed in user)
 -----------------------------------*/
 module.exports.updateMyPost = asyncHandler(async (request, response) => {
@@ -80,7 +80,7 @@ module.exports.updateMyPost = asyncHandler(async (request, response) => {
 /*---------------------------------
 * @desc delete post
 * @route /api/v1/posts/:id
-* @method delete
+* @method DELETE
 * @access private (only signed in user or admin)
 -----------------------------------*/
 module.exports.deleteProfile = asyncHandler(async (request, response) => {
@@ -99,4 +99,41 @@ module.exports.deleteProfile = asyncHandler(async (request, response) => {
 	await Post.findByIdAndDelete(request.params.id);
 	// TODO: deleting all its comments in the database
 	response.status(200).json({ status: "success", data: null });
+});
+
+/*---------------------------------
+* @desc toggle like
+* @route /api/v1/posts/like/:id
+* @method PUT
+* @access private (only logged in user)
+-----------------------------------*/
+module.exports.toggleLike = asyncHandler(async (request, response) => {
+	const loggedInUser = request.user.id;
+	const { id: postID } = request.params;
+	let post = await Post.findById(postID);
+
+	if (!post) {
+		response.status(404).json({ status: "fail", message: "post not found" });
+	}
+
+	const isPostAlreadyLiked = post.likes.find(
+		(user) => user.toString() === loggedInUser
+	);
+
+	if (isPostAlreadyLiked) {
+		post = await Post.findByIdAndUpdate(
+			postID,
+			{ $pull: { likes: loggedInUser } },
+			{ new: true }
+		);
+	} else {
+		post = await Post.findByIdAndUpdate(
+			postID,
+			{
+				$push: { likes: loggedInUser },
+			},
+			{ new: true }
+		);
+	}
+	response.status(200).json({ status: "success", data: { post } });
 });

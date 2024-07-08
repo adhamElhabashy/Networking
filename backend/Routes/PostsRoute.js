@@ -17,4 +17,6 @@ router
 	.put(verifyToken, Protect, verifyUserPost, PostsController.updateMyPost)
 	.delete(verifyToken, Protect, PostsController.deleteProfile);
 
+router.route("/like/:id").put(verifyToken, Protect, PostsController.toggleLike);
+
 module.exports = router;
