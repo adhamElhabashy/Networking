@@ -10,9 +10,9 @@ const MyButton = styled(Button)(({ theme }) => ({
 		color: theme.palette.secondary.main,
 	},
 }));
-export default function ButtonComp({ children }) {
+export default function ButtonComp({ children, sx }) {
 	return (
-		<MyButton variant="contained" size="large" sx={{ marginRight: "20px" }}>
+		<MyButton variant="contained" size="large" sx={sx}>
 			{children}
 		</MyButton>
 	);

@@ -18,7 +18,7 @@ export default function AppBarComp() {
 					<ButtonComp
 						variant="contained"
 						size="large"
-						sx={{ marginRight: "10px" }}
+						sx={{ marginRight: "20px" }}
 					>
 						Sign In
 					</ButtonComp>
