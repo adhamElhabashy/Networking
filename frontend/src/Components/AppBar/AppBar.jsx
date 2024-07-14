@@ -18,14 +18,14 @@ export default function AppBarComp() {
 					<ButtonComp
 						variant="contained"
 						size="large"
-						sx={{ marginRight: "20px" }}
+						sx={{ marginRight: "20px", display: { xs: "none", sm: "block" } }}
 					>
 						Sign In
 					</ButtonComp>
 					<ButtonComp
 						variant="contained"
 						size="large"
-						sx={{ marginRight: "20px" }}
+						sx={{ marginRight: "20px", display: { xs: "none", sm: "block" } }}
 					>
 						Sign Up
 					</ButtonComp>
