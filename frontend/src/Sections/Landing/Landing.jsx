@@ -46,7 +46,7 @@ export default function Landing() {
 				sx={{
 					height: "100vh",
 					position: "relative",
-					backgroundColor: "primary.main",
+					background: "linear-gradient(90deg, #0099ff 0%, #33ccff 100%)",
 				}}
 			>
 				<div
@@ -65,18 +65,27 @@ export default function Landing() {
 					>
 						Start To Inspire People And Get Inspired By Them
 					</Typography>
-					<div className="sign" style={{ marginTop: "20px" }}>
+					<div
+						className="sign"
+						style={{
+							marginTop: "20px",
+							display: "flex",
+							flexDirection: "column",
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
 						<TextField
 							id="email"
 							label="Email"
 							variant="outlined"
+							fullWidth
 							sx={{
 								zIndex: 1,
 								backgroundColor: "secondary.main",
-								width: "60%",
 							}}
 						/>
-						<ButtonComp>Let's Go</ButtonComp>
+						<ButtonComp sx={{ marginTop: "10px" }}>Let's Go</ButtonComp>
 					</div>
 				</div>
 			</Box>
