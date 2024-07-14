@@ -10,10 +10,10 @@ const MyButton = styled(Button)(({ theme }) => ({
 		color: theme.palette.secondary.main,
 	},
 }));
-export default function ButtonComp() {
+export default function ButtonComp({ children }) {
 	return (
 		<MyButton variant="contained" size="large" sx={{ marginRight: "20px" }}>
-			Sign Up
+			{children}
 		</MyButton>
 	);
 }
