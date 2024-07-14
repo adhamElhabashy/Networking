@@ -2,7 +2,9 @@ import * as React from "react";
 import WaveAnimation from "../../Components/WaveAnimation/WaveAnimation";
 import { Box, Grid, Typography } from "@mui/material";
 import Collaboration from "../../assets/Collaboration.png";
+import TextField from "@mui/material/TextField";
 import "./Landing.css";
+import ButtonComp from "../../Components/ButtonComp/ButtonComp";
 
 export default function Landing() {
 	return (
@@ -40,6 +42,44 @@ export default function Landing() {
 					</div>
 				</Grid>
 			</Grid>
+			<Box
+				sx={{
+					height: "100vh",
+					position: "relative",
+					backgroundColor: "primary.main",
+				}}
+			>
+				<div
+					style={{
+						position: "absolute",
+						left: "50%",
+						top: "50%",
+						transform: "translate(-50%, -50%)",
+					}}
+				>
+					<Typography
+						variant="h4"
+						textAlign={"center"}
+						color={"secondary"}
+						sx={{ width: "100%" }}
+					>
+						Start To Inspire People And Get Inspired By Them
+					</Typography>
+					<div className="sign" style={{ marginTop: "20px" }}>
+						<TextField
+							id="email"
+							label="Email"
+							variant="outlined"
+							sx={{
+								zIndex: 1,
+								backgroundColor: "secondary.main",
+								width: "60%",
+							}}
+						/>
+						<ButtonComp>Let's Go</ButtonComp>
+					</div>
+				</div>
+			</Box>
 		</Box>
 	);
 }
