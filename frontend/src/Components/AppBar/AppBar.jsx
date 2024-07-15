@@ -6,6 +6,8 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ButtonComp from "../ButtonComp/ButtonComp";
+import { Link } from "react-router-dom";
+import "./AppBar.css";
 
 export default function AppBarComp() {
 	return (
@@ -20,14 +22,18 @@ export default function AppBarComp() {
 						size="large"
 						sx={{ marginRight: "20px", display: { xs: "none", sm: "block" } }}
 					>
-						Sign In
+						<Link to="/signin" className="link">
+							Sign In
+						</Link>
 					</ButtonComp>
 					<ButtonComp
 						variant="contained"
 						size="large"
 						sx={{ marginRight: "20px", display: { xs: "none", sm: "block" } }}
 					>
-						Sign Up
+						<Link to={"/signUp"} className="link">
+							Sign Up
+						</Link>
 					</ButtonComp>
 					<IconButton
 						size="large"
