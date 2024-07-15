@@ -5,6 +5,7 @@ import AppBar from "./Components/AppBar/AppBar";
 import Landing from "./Sections/Landing/Landing";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./Sections/SignUp/SignUp";
+import SignIn from "./Sections/SignIn/SignIn";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -19,6 +20,7 @@ function App() {
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
 				<Route exact path="/signup" element={<SignUp />} />
+				<Route exact path="/signin" element={<SignIn />} />
 			</Routes>
 		</ThemeProvider>
 	);
