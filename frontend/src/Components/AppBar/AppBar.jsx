@@ -15,7 +15,9 @@ export default function AppBarComp() {
 			<AppBar position="fixed">
 				<Toolbar>
 					<Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-						Networking
+						<Link to={"/"} className="link">
+							Networking
+						</Link>
 					</Typography>
 					<ButtonComp
 						variant="contained"
