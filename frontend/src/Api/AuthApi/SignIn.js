@@ -1,12 +1,12 @@
 import axios from "axios";
 import saveInLocalStorage from "../../Functions/SaveInLocalStorage";
 
-const postData = {
-	email: "adham@newadmin.com",
-	password: "test12345",
-};
-
 export default async function SignIn(email, password) {
+	const postData = {
+		email,
+		password,
+	};
+
 	try {
 		const response = await axios.post(
 			`${import.meta.env.VITE_API_URL}/api/v1/auth/signin`,
@@ -16,6 +16,9 @@ export default async function SignIn(email, password) {
 		const { data } = response.data;
 
 		saveInLocalStorage(data);
-		console.log(data);
-	} catch (error) {}
+	} catch (error) {
+		// this is temporary action
+		alert(error.response.data.message);
+		return;
+	}
 }

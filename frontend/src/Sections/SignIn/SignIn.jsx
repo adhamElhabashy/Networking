@@ -3,8 +3,14 @@ import { Box, TextField } from "@mui/material";
 import JoinImage from "../../assets/Join.png";
 import "./SignIn.css";
 import ButtonComp from "../../Components/ButtonComp/ButtonComp";
+import signIn from "../../Api/AuthApi/SignIn.js";
+import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+	const [emailValue, setEmailValue] = React.useState("");
+	const [passwordValue, setPasswordValue] = React.useState("");
+	const navigate = useNavigate();
+
 	return (
 		<Box sx={{ height: "100vh", position: "relative" }}>
 			<img
@@ -43,6 +49,10 @@ export default function SignIn() {
 					sx={{ backgroundColor: "secondary.main" }}
 					className="input"
 					fullWidth
+					value={emailValue}
+					onChange={(e) => {
+						setEmailValue(e.target.value);
+					}}
 				/>
 				<TextField
 					required
@@ -51,8 +61,20 @@ export default function SignIn() {
 					sx={{ backgroundColor: "secondary.main" }}
 					className="input"
 					fullWidth
+					value={passwordValue}
+					onChange={(e) => {
+						setPasswordValue(e.target.value);
+					}}
 				/>
-				<ButtonComp type="submit">Sign In</ButtonComp>
+				<ButtonComp
+					onClick={() => {
+						signIn(emailValue, passwordValue);
+						// this is a temporary navigate the will be changed with the feed route
+						navigate("/");
+					}}
+				>
+					Sign In
+				</ButtonComp>
 			</Box>
 		</Box>
 	);
