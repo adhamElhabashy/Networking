@@ -42,6 +42,8 @@ module.exports.signIn = asyncHandler(async (request, response) => {
 			.json({ message: "Email or password is not correct" });
 	}
 
+	user.password = undefined;
+
 	// 3 - create token
 	const token = jwt.sign(
 		{ id: user._id, isAdmin: user.isAdmin },
@@ -51,5 +53,9 @@ module.exports.signIn = asyncHandler(async (request, response) => {
 		}
 	);
 
-	response.status(200).json({ status: "success", data: { user }, token });
+	response.cookie("authToken", token, {
+		httpOnly: true,
+		sameSite: "lax", // Ensure proper cross-site behavior
+	});
+	response.status(200).json({ status: "success", data: { user } });
 });
