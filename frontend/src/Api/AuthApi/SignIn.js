@@ -17,8 +17,11 @@ export default async function SignIn(email, password) {
 
 		saveInLocalStorage(data);
 	} catch (error) {
-		// this is temporary action
-		alert(error.response.data.message);
-		return;
+		const status = error.response ? error.response.status : null;
+		const message =
+			error.response && error.response.data
+				? error.response.data.message
+				: error.message;
+		throw { status, message };
 	}
 }
