@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, TextField } from "@mui/material";
+import { Alert, Box, TextField } from "@mui/material";
 import JoinImage from "../../assets/Join.png";
 import "./SignIn.css";
 import ButtonComp from "../../Components/ButtonComp/ButtonComp";
@@ -7,9 +7,31 @@ import signIn from "../../Api/AuthApi/SignIn.js";
 import { useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+	const formRef = React.useRef();
 	const [emailValue, setEmailValue] = React.useState("");
 	const [passwordValue, setPasswordValue] = React.useState("");
+	const [error, setError] = React.useState(false);
+	const [errorMessage, setErrorMessage] = React.useState("");
 	const navigate = useNavigate();
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		const form = formRef.current;
+		if (form.checkValidity()) {
+			try {
+				await signIn(emailValue, passwordValue);
+				setError(false);
+				// this is a temporary navigate the will be changed with the feed route
+				navigate("/");
+			} catch ({ status, message }) {
+				setError(true);
+				setErrorMessage(message);
+			}
+		} else {
+			setError(true);
+			setErrorMessage("Please fill out all required fields correctly.");
+		}
+	}
 
 	return (
 		<Box sx={{ height: "100vh", position: "relative" }}>
@@ -31,6 +53,8 @@ export default function SignIn() {
 			></div>
 			<Box
 				component="form"
+				ref={formRef}
+				onSubmit={handleSubmit}
 				sx={{
 					position: "absolute",
 					top: "50%",
@@ -46,6 +70,7 @@ export default function SignIn() {
 					required
 					id="email"
 					label="email"
+					type="email"
 					sx={{ backgroundColor: "secondary.main" }}
 					className="input"
 					fullWidth
@@ -58,6 +83,7 @@ export default function SignIn() {
 					required
 					id="password"
 					label="password"
+					type="password"
 					sx={{ backgroundColor: "secondary.main" }}
 					className="input"
 					fullWidth
@@ -66,15 +92,8 @@ export default function SignIn() {
 						setPasswordValue(e.target.value);
 					}}
 				/>
-				<ButtonComp
-					onClick={() => {
-						signIn(emailValue, passwordValue);
-						// this is a temporary navigate the will be changed with the feed route
-						navigate("/");
-					}}
-				>
-					Sign In
-				</ButtonComp>
+				<ButtonComp type="submit">Sign In</ButtonComp>
+				{error ? <Alert severity="error">{errorMessage}</Alert> : null}
 			</Box>
 		</Box>
 	);
