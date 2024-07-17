@@ -6,6 +6,7 @@ import Landing from "./Sections/Landing/Landing";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./Sections/SignUp/SignUp";
 import SignIn from "./Sections/SignIn/SignIn";
+import Feed from "./Sections/Feed/Feed";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -21,6 +22,7 @@ function App() {
 				<Route exact path="/" element={<Landing />} />
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/signin" element={<SignIn />} />
+				<Route path="/feed" element={<Feed />} />
 			</Routes>
 		</ThemeProvider>
 	);
