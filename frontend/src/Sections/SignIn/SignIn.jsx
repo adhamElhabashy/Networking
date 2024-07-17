@@ -22,7 +22,7 @@ export default function SignIn() {
 				await signIn(emailValue, passwordValue);
 				setError(false);
 				// this is a temporary navigate the will be changed with the feed route
-				navigate("/");
+				navigate("/feed");
 			} catch ({ status, message }) {
 				setError(true);
 				setErrorMessage(message);
