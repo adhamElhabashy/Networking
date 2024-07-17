@@ -19,8 +19,8 @@ function App() {
 			<AppBar />
 			<Routes>
 				<Route exact path="/" element={<Landing />} />
-				<Route exact path="/signup" element={<SignUp />} />
-				<Route exact path="/signin" element={<SignIn />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route path="/signin" element={<SignIn />} />
 			</Routes>
 		</ThemeProvider>
 	);
