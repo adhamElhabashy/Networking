@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import SignUp from "./Sections/SignUp/SignUp";
 import SignIn from "./Sections/SignIn/SignIn";
 import Feed from "./Sections/Feed/Feed";
+import Account from "./Sections/Account/Account";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -23,6 +24,7 @@ function App() {
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/feed" element={<Feed />} />
+				<Route path="/account" element={<Account />} />
 			</Routes>
 		</ThemeProvider>
 	);
