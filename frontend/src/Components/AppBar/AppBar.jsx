@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import "./AppBar.css";
 import useLocalStorage from "../../Hooks/useLocalStorage";
 
-const settings = ["Account", "Saved Posts", "Settings", "Logout"];
+const settings = ["Account", "Saved", "Settings", "Logout"];
 
 export default function AppBarComp() {
 	const [storageValue, setStorageValue] = useLocalStorage("profile");
@@ -99,7 +99,9 @@ export default function AppBarComp() {
 							>
 								{settings.map((setting) => (
 									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Typography textAlign="center">{setting}</Typography>
+										<Link to={`/${setting}`} className="link">
+											<Typography textAlign="center">{setting}</Typography>
+										</Link>
 									</MenuItem>
 								))}
 							</Menu>
