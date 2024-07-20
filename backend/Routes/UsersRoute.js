@@ -10,4 +10,8 @@ router
 	.route("/:id")
 	.put(verifyToken, Protect, UsersController.UpdateMyProfile)
 	.delete(verifyToken, Protect, UsersController.deleteUserProfile);
+
+router
+	.route("/:id/posts")
+	.get(verifyToken, Protect, UsersController.getAllPostsOfUser);
 module.exports = router;

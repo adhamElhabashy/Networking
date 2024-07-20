@@ -1,5 +1,6 @@
 const User = require("../Models/UserModel");
 const asyncHandler = require("express-async-handler");
+const Post = require("../Models/PostModel");
 
 const filterRequestObject = require("../Functions/FilterRequestObject");
 
@@ -7,12 +8,24 @@ const filterRequestObject = require("../Functions/FilterRequestObject");
 * @desc get all the users
 * @route /api/v1/users
 * @method GET
-* @access private - only admin
+* @access private - only logged in user
 -----------------------------------*/
 module.exports.getAllUsers = asyncHandler(async (request, response) => {
 	const users = await User.find();
 
 	response.status(200).json({ status: "success", data: { users } });
+});
+
+/*---------------------------------
+* @desc get all the posts of user
+* @route /api/v1/users/:id/posts
+* @method GET
+* @access private - only logged in user 
+-----------------------------------*/
+module.exports.getAllPostsOfUser = asyncHandler(async (request, response) => {
+	const posts = await Post.find({ user: request.params.id });
+
+	response.status(200).json({ status: "success", posts });
 });
 
 /*---------------------------------
