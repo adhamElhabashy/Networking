@@ -25,7 +25,7 @@ module.exports.getAllUsers = asyncHandler(async (request, response) => {
 module.exports.getAllPostsOfUser = asyncHandler(async (request, response) => {
 	const posts = await Post.find({ user: request.params.id });
 
-	response.status(200).json({ status: "success", posts });
+	response.status(200).json({ status: "success", data: { posts } });
 });
 
 /*---------------------------------
