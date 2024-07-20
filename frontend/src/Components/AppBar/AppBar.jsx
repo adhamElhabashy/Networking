@@ -78,7 +78,7 @@ export default function AppBarComp() {
 						<Box sx={{ flexGrow: 0, marginRight: "15px" }}>
 							<Tooltip title="Open settings">
 								<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-									<Avatar alt="Remy Sharp" src={storageValue.profilePhoto} />
+									<Avatar alt="Remy Sharp" src={storageValue?.profilePhoto} />
 								</IconButton>
 							</Tooltip>
 							<Menu
