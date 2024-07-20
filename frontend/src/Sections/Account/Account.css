@@ -1,0 +1,16 @@
+.account-container {
+	min-height: 100vh !important;
+	width: 100%;
+	background: linear-gradient(360deg, #ffffff 0%, #55bbff 14%, #0099ff 100%);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.img-holder {
+	width: 200px;
+	height: 200px;
+}
+.img-holder img {
+	width: 100%;
+	height: 100%;
+}
