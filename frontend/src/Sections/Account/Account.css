@@ -6,11 +6,28 @@
 	padding-bottom: 80px;
 }
 
-.img-holder {
+.image-holder img {
 	width: 200px;
 	height: 200px;
 }
-.img-holder img {
+
+.user-info {
+	margin: 15px 15px !important;
+}
+
+.account-info {
+	display: flex !important;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.posts-box {
 	width: 100%;
-	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.account-post {
+	margin: 10px auto !important;
 }
