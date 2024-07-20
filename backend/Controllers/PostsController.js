@@ -30,10 +30,14 @@ module.exports.getAllThePosts = asyncHandler(async (request, response) => {
 
 	if (pageNumber) {
 		posts = await Post.find(filterCategory)
+			.populate("user", ["-password"])
+			.populate("comments")
 			.skip((+pageNumber - 1) * postsPerPage)
 			.limit(postsPerPage);
 	} else {
-		posts = await Post.find(filterCategory);
+		posts = await Post.find(filterCategory)
+			.populate("user", ["-password"])
+			.populate("comments");
 	}
 
 	response.status(200).json({ status: "success", data: { posts } });
