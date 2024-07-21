@@ -8,6 +8,7 @@ import SignUp from "./Sections/SignUp/SignUp";
 import SignIn from "./Sections/SignIn/SignIn";
 import Feed from "./Sections/Feed/Feed";
 import Account from "./Sections/Account/Account";
+import PostPage from "./Sections/PostPage/PostPage";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -25,6 +26,7 @@ function App() {
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/feed" element={<Feed />} />
 				<Route path="/account" element={<Account />} />
+				<Route path="/posts/:id" element={<PostPage />} />
 			</Routes>
 		</ThemeProvider>
 	);
