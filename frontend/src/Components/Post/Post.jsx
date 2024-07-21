@@ -12,7 +12,7 @@ export default function Post({ post, className }) {
 			key={post._id}
 			className={className}
 		>
-			<CardActionArea>
+			<CardActionArea href={`/posts/${post._id}`}>
 				<CardMedia
 					component="img"
 					height="140"
