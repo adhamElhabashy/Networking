@@ -36,6 +36,18 @@ export default function CreatePostPage() {
 		callCreatePost(event);
 	}
 
+	const handleChange = (e) => {
+		setDescription(e.target.value);
+	};
+
+	React.useEffect(() => {
+		const textarea = descriptionRef.current;
+		if (textarea) {
+			textarea.style.height = "auto";
+			textarea.style.height = `${textarea.scrollHeight}px`;
+		}
+	}, [description]);
+
 	return (
 		<Box className="create-post-box" sx={{ backgroundColor: "primary.main" }}>
 			<div className="img-holder">
@@ -68,9 +80,7 @@ export default function CreatePostPage() {
 					required
 					ref={descriptionRef}
 					value={description}
-					onChange={(e) => {
-						setDescription(e.currentTarget.value);
-					}}
+					onChange={handleChange}
 				/>
 				<ButtonComp type="submit">Publish Post</ButtonComp>
 			</form>

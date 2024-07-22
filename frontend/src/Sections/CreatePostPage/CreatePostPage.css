@@ -35,6 +35,7 @@
 	min-height: fit-content;
 	padding: 20px;
 	resize: none;
+	overflow: hidden;
 }
 
 .create-post-box .post-content-input input:focus,
