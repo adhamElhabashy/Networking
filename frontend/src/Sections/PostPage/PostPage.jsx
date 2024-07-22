@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import GetSinglePost from "../../Api/PostsAPi/GetSinglePost";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./PostPage.css";
@@ -28,33 +28,35 @@ export default function PostPage() {
 
 	return (
 		<Box className="post-page-box" sx={{ backgroundColor: "primary.main" }}>
-			<div className="img-holder">
-				<img src="https://placeholder.com/400" alt="post image" />
-			</div>
-			<div className="user-info">
-				<div className="user-image">
-					<img
-						src={post.user?.profilePhoto}
-						alt={`${post.user?.username} photo`}
-					/>
+			<Container>
+				<div className="img-holder">
+					<img src="https://placeholder.com/400" alt="post image" />
 				</div>
-				<Typography variant="subtitle1" color={"secondary"}>
-					{post.user?.username}
-				</Typography>
-			</div>
-			<div className="post-content">
-				<Typography
-					variant="h5"
-					color={"secondary"}
-					textAlign={"center"}
-					gutterBottom
-				>
-					{post.title}
-				</Typography>
-				<Typography color={"secondary"} variant="body">
-					{post.description}
-				</Typography>
-			</div>
+				<div className="user-info">
+					<div className="user-image">
+						<img
+							src={post.user?.profilePhoto}
+							alt={`${post.user?.username} photo`}
+						/>
+					</div>
+					<Typography variant="subtitle1" color={"secondary"}>
+						{post.user?.username}
+					</Typography>
+				</div>
+				<div className="post-content">
+					<Typography
+						variant="h5"
+						color={"secondary"}
+						textAlign={"center"}
+						gutterBottom
+					>
+						{post.title}
+					</Typography>
+					<Typography color={"secondary"} variant="body">
+						{post.description}
+					</Typography>
+				</div>
+			</Container>
 			<div className="actions">
 				<IconButton color="inherit">
 					<InsertCommentIcon />
