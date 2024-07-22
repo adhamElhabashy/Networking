@@ -2,9 +2,7 @@ import axios from "axios";
 export default async function GetPostsOfUser(id) {
 	try {
 		const response = await axios.get(
-			`${
-				import.meta.env.VITE_API_URL
-			}/api/v1/users/6665bb21a60fcac0182da359/posts`,
+			`${import.meta.env.VITE_API_URL}/api/v1/users/${id}/posts`,
 			{
 				withCredentials: true,
 			}
