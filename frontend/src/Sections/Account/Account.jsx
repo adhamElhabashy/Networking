@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import CreateIcon from "@mui/icons-material/Create";
 import "./Account.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import GetPostsOfUser from "../../Api/UsersApi/GetPostsOfUser";
 import Post from "../../Components/Post/Post";
 
@@ -68,6 +69,10 @@ export default function Account() {
 						))}
 					</Grid>
 				</div>
+				<Button variant="contained" fullWidth component={Link} to="createpost">
+					<CreateIcon />
+					New Post
+				</Button>
 			</Container>
 		</Box>
 	);
