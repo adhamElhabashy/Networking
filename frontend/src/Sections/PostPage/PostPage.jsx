@@ -27,7 +27,7 @@ export default function PostPage() {
 	}, []);
 
 	return (
-		<Box className="post-page-box">
+		<Box className="post-page-box" sx={{ backgroundColor: "primary.main" }}>
 			<div className="img-holder">
 				<img src="https://placeholder.com/400" alt="post image" />
 			</div>

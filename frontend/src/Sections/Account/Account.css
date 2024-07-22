@@ -1,7 +1,6 @@
 .account-container {
 	min-height: 100vh !important;
 	width: 100%;
-	background: linear-gradient(360deg, #ffffff 0%, #55bbff 14%, #0099ff 100%);
 	padding-top: 80px;
 	padding-bottom: 80px;
 }

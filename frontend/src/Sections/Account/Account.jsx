@@ -32,7 +32,7 @@ export default function Account() {
 	}, []);
 
 	return (
-		<Box className="account-container">
+		<Box className="account-container" sx={{ backgroundColor: "primary.main" }}>
 			<Container>
 				<Box
 					className="account-info"

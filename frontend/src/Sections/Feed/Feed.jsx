@@ -24,7 +24,7 @@ export default function Feed() {
 	}, []); // Empty dependency array means this runs once after the first render
 
 	return (
-		<Box className="feed-box">
+		<Box className="feed-box" sx={{ backgroundColor: "primary.main" }}>
 			{data.posts?.map((post) => (
 				<Post post={post} key={post._id} className={"feed-post"} />
 			))}

@@ -37,7 +37,7 @@ export default function CreatePostPage() {
 	}
 
 	return (
-		<Box className="create-post-box">
+		<Box className="create-post-box" sx={{ backgroundColor: "primary.main" }}>
 			<div className="img-holder">
 				<img src="https://placeholder.com/400" alt="post image" />
 			</div>
