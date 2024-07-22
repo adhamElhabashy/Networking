@@ -1,0 +1,9 @@
+.menu-container {
+	position: absolute !important;
+	right: 0 !important;
+	opacity: 0;
+}
+
+.card:hover .menu-container {
+	opacity: 1;
+}
