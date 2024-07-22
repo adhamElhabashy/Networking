@@ -1,0 +1,44 @@
+.create-post-box {
+	min-height: 100vh !important;
+	width: 100%;
+	background: linear-gradient(360deg, #ffffff 0%, #55bbff 14%, #0099ff 100%);
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.create-post-box .post-content-input {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	min-height: 60vh;
+}
+
+.create-post-box .post-content-input input,
+.create-post-box .post-content-input textarea {
+	background-color: transparent;
+	border: none;
+	margin-top: 10px;
+	color: white;
+}
+
+.create-post-box .post-content-input input {
+	text-align: center;
+	width: 100%;
+}
+
+.create-post-box .post-content-input .post-title {
+	font-size: 25px;
+}
+
+.create-post-box .post-content-input textarea {
+	width: 100%;
+	min-height: fit-content;
+	padding: 20px;
+	resize: none;
+}
+
+.create-post-box .post-content-input input:focus,
+.create-post-box .post-content-input textarea:focus {
+	outline: none;
+}
