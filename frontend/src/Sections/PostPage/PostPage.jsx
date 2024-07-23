@@ -5,11 +5,18 @@ import { Box, Container, IconButton, Typography } from "@mui/material";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./PostPage.css";
+import CommentsDrawer from "../../Components/CommentsDrawer/CommentsDrawer";
 
 export default function PostPage() {
 	const { id } = useParams();
 	const [post, setPost] = React.useState({});
 	const navigate = useNavigate();
+
+	const [open, setOpen] = React.useState(false);
+
+	const toggleDrawer = (newOpen) => () => {
+		setOpen(newOpen);
+	};
 
 	React.useEffect(() => {
 		async function callGetSinglePost() {
@@ -25,6 +32,8 @@ export default function PostPage() {
 		}
 		callGetSinglePost();
 	}, []);
+
+	console.log(post);
 
 	return (
 		<Box className="post-page-box" sx={{ backgroundColor: "primary.main" }}>
@@ -58,13 +67,18 @@ export default function PostPage() {
 				</div>
 			</Container>
 			<div className="actions">
-				<IconButton color="inherit">
+				<IconButton color="inherit" onClick={toggleDrawer(true)}>
 					<InsertCommentIcon />
 				</IconButton>
 				<IconButton color="inherit">
 					<FavoriteIcon />
 				</IconButton>
 			</div>
+			<CommentsDrawer
+				open={open}
+				toggleDrawer={toggleDrawer}
+				comments={post.comments}
+			/>
 		</Box>
 	);
 }
