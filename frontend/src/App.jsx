@@ -27,7 +27,7 @@ function App() {
 				<Route path="/signin" element={<SignIn />} />
 				<Route path="/feed" element={<Feed />} />
 				<Route path="/account" element={<Account />} />
-				<Route path="/account/createpost" element={<CreatePostPage />} />
+				<Route path="/account/posts/new" element={<CreatePostPage />} />
 				<Route path="/posts/:id" element={<PostPage />} />
 			</Routes>
 		</ThemeProvider>

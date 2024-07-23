@@ -70,7 +70,7 @@ export default function Account() {
 						))}
 					</Grid>
 				</div>
-				<Button variant="contained" fullWidth component={Link} to="createpost">
+				<Button variant="contained" fullWidth component={Link} to="posts/new">
 					<CreateIcon />
 					New Post
 				</Button>
