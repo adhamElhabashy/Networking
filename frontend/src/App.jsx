@@ -28,6 +28,7 @@ function App() {
 				<Route path="/feed" element={<Feed />} />
 				<Route path="/account" element={<Account />} />
 				<Route path="/account/posts/new" element={<CreatePostPage />} />
+				<Route path="/account/posts/edit/:id" element={<CreatePostPage />} />
 				<Route path="/posts/:id" element={<PostPage />} />
 			</Routes>
 		</ThemeProvider>
