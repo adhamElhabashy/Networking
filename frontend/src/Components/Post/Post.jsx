@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./Post.css";
 import DeletePost from "../../Api/PostsAPi/DeletePost";
+import { useNavigate } from "react-router-dom";
 
 const options = ["Update", "Delete"];
 
@@ -17,6 +18,8 @@ export default function Post({ post, className }) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
 	const profile = window.localStorage.getItem("profile");
+	const navigate = useNavigate();
+
 	const handleClick = (event) => {
 		event.preventDefault();
 		setAnchorEl(event.currentTarget);
