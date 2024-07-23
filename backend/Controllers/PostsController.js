@@ -52,7 +52,13 @@ module.exports.getAllThePosts = asyncHandler(async (request, response) => {
 module.exports.getSinglePost = asyncHandler(async (request, response) => {
 	const post = await Post.findById(request.params.id)
 		.populate("user", ["-password"])
-		.populate("comments");
+		.populate({
+			path: "comments",
+			populate: {
+				path: "user",
+				select: "-password",
+			},
+		});
 
 	if (!post) {
 		response.status(404).json({ status: "fail", message: "post not found" });
