@@ -3,7 +3,9 @@ import { Box } from "@mui/material";
 import ButtonComp from "../../Components/ButtonComp/ButtonComp";
 import "./CreatePostPage.css";
 import CreatePost from "../../Api/PostsAPi/CreatePost";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import GetSinglePost from "../../Api/PostsAPi/GetSinglePost";
+import UpdatePost from "../../Api/PostsAPi/UpdatePost";
 
 export default function CreatePostPage() {
 	const titleRef = React.useRef();
@@ -14,14 +16,47 @@ export default function CreatePostPage() {
 	const [category, setCategory] = React.useState("Category");
 	const [description, setDescription] = React.useState("Write Your Post Here");
 
-	const [data, setData] = React.useState({});
+	const { id } = useParams();
+
+	async function callGetSinglePost() {
+		try {
+			const response = await GetSinglePost(id);
+			setTitle(response.post.title);
+
+			setDescription(response.post.description);
+
+			setCategory(response.post.category);
+		} catch (error) {
+			if (error.status === 401) {
+				window.localStorage.clear();
+				navigate("/signin");
+			}
+		}
+	}
+
+	async function callUpdatePost() {
+		try {
+			const response = await UpdatePost(id, title, description, category);
+			navigate(`/posts/${id}`);
+		} catch (error) {
+			if (error.status === 401) {
+				window.localStorage.clear();
+				navigate("/signin");
+			}
+		}
+	}
+
+	React.useEffect(() => {
+		if (id) {
+			callGetSinglePost();
+		}
+	}, []);
 
 	const navigate = useNavigate();
 
 	async function callCreatePost() {
 		try {
 			const postsData = await CreatePost(title, description, category);
-			setData(postsData.post);
 			navigate(`/posts/${postsData.post._id}`);
 		} catch (error) {
 			if (error.status === 401) {
@@ -33,7 +68,11 @@ export default function CreatePostPage() {
 
 	function handleSubmit(event) {
 		event.preventDefault();
-		callCreatePost(event);
+		if (!id) {
+			callCreatePost(event);
+		} else {
+			callUpdatePost(event);
+		}
 	}
 
 	const handleChange = (e) => {
@@ -82,7 +121,11 @@ export default function CreatePostPage() {
 					value={description}
 					onChange={handleChange}
 				/>
-				<ButtonComp type="submit">Publish Post</ButtonComp>
+				{!id ? (
+					<ButtonComp type="submit">Publish Post</ButtonComp>
+				) : (
+					<ButtonComp type="submit">Update Post</ButtonComp>
+				)}
 			</form>
 		</Box>
 	);
