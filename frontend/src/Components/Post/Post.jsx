@@ -40,7 +40,7 @@ export default function Post({ post, className }) {
 	const handleMenuItemClick = (e) => {
 		if (e.target.id == "Delete") {
 			callDeletePost();
-			console.log("yes");
+			handleClose();
 		} else {
 			handleClose();
 		}
