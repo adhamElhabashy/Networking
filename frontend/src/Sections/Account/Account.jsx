@@ -29,7 +29,8 @@ export default function Account() {
 
 			fetchData();
 		}
-	}, []);
+		// this feature will be replaced with another technology
+	}, [GetPostsOfUser(profile.user._id)]);
 
 	return (
 		<Box className="account-container" sx={{ backgroundColor: "primary.main" }}>

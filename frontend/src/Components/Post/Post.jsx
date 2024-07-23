@@ -9,18 +9,41 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./Post.css";
+import DeletePost from "../../Api/PostsAPi/DeletePost";
 
 const options = ["Update", "Delete"];
 
 export default function Post({ post, className }) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
+	const profile = window.localStorage.getItem("profile");
 	const handleClick = (event) => {
 		event.preventDefault();
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = () => {
 		setAnchorEl(null);
+	};
+
+	async function callDeletePost() {
+		try {
+			const data = await DeletePost(post._id);
+			console.log(data);
+		} catch (error) {
+			if (error.status === 401) {
+				window.localStorage.clear();
+				navigate("/signin");
+			}
+		}
+	}
+
+	const handleMenuItemClick = (e) => {
+		if (e.target.id == "Delete") {
+			callDeletePost();
+			console.log("yes");
+		} else {
+			handleClose();
+		}
 	};
 
 	return (
@@ -30,34 +53,40 @@ export default function Post({ post, className }) {
 			className={`${className} card`}
 		>
 			<CardActionArea href={`/posts/${post._id}`}>
-				<Box className="menu-container">
-					<IconButton
-						aria-label="more"
-						id="long-button"
-						aria-controls={open ? "long-menu" : undefined}
-						aria-expanded={open ? "true" : undefined}
-						aria-haspopup="true"
-						onClick={handleClick}
-					>
-						<MoreVertIcon />
-					</IconButton>
-					<Menu
-						id="long-menu"
-						MenuListProps={{
-							"aria-labelledby": "long-button",
-						}}
-						anchorEl={anchorEl}
-						open={open}
-						onClose={handleClose}
-						className="post-menu"
-					>
-						{options.map((option) => (
-							<MenuItem key={option} onClick={handleClose}>
-								{option}
-							</MenuItem>
-						))}
-					</Menu>
-				</Box>
+				{profile.user?._id === post.user._id && (
+					<Box className="menu-container">
+						<IconButton
+							aria-label="more"
+							id="long-button"
+							aria-controls={open ? "long-menu" : undefined}
+							aria-expanded={open ? "true" : undefined}
+							aria-haspopup="true"
+							onClick={handleClick}
+						>
+							<MoreVertIcon />
+						</IconButton>
+						<Menu
+							id="long-menu"
+							MenuListProps={{
+								"aria-labelledby": "long-button",
+							}}
+							anchorEl={anchorEl}
+							open={open}
+							onClose={handleClose}
+							className="post-menu"
+						>
+							{options.map((option) => (
+								<MenuItem
+									key={option}
+									onClick={handleMenuItemClick}
+									id={option}
+								>
+									{option}
+								</MenuItem>
+							))}
+						</Menu>
+					</Box>
+				)}
 				<CardMedia
 					component="img"
 					height="140"
