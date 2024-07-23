@@ -44,7 +44,8 @@ export default function Post({ post, className }) {
 		if (e.target.id == "Delete") {
 			callDeletePost();
 			handleClose();
-		} else {
+		} else if (e.target.id == "Update") {
+			navigate(`/account/posts/edit/${post._id}`);
 			handleClose();
 		}
 	};
