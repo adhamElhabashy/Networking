@@ -5,14 +5,21 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Avatar, Box, IconButton, ListItemAvatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import AddComment from "../AddComment/AddComment";
 
-export default function CommentsDrawer({ open, toggleDrawer, comments }) {
-	console.log(comments);
+export default function CommentsDrawer({
+	open,
+	toggleDrawer,
+	comments,
+	postId,
+}) {
 	const DrawerList = (
 		<Box sx={{ width: 300 }} role="presentation">
 			<IconButton onClick={toggleDrawer(false)}>
 				<CloseIcon />
 			</IconButton>
+
+			<AddComment postId={postId} />
 			<List>
 				{comments?.map((comment) => (
 					<ListItem key={comment._id}>
