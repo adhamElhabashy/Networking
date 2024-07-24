@@ -17,23 +17,21 @@ export default function PostPage() {
 	const toggleDrawer = (newOpen) => () => {
 		setOpen(newOpen);
 	};
-
-	React.useEffect(() => {
-		async function callGetSinglePost() {
-			try {
-				const data = await GetSinglePost(id);
-				setPost(data.post);
-			} catch (error) {
-				if (error.status === 401) {
-					window.localStorage.clear();
-					navigate("/signin");
-				}
+	async function callGetSinglePost() {
+		try {
+			const data = await GetSinglePost(id);
+			setPost(data.post);
+		} catch (error) {
+			if (error.status === 401) {
+				window.localStorage.clear();
+				navigate("/signin");
 			}
 		}
+	}
+	React.useEffect(() => {
 		callGetSinglePost();
-	}, []);
-
-	console.log(post);
+		// this code will be replaced with some technology
+	}, [callGetSinglePost()]);
 
 	return (
 		<Box className="post-page-box" sx={{ backgroundColor: "primary.main" }}>
@@ -78,6 +76,7 @@ export default function PostPage() {
 				open={open}
 				toggleDrawer={toggleDrawer}
 				comments={post.comments}
+				postId={post._id}
 			/>
 		</Box>
 	);
