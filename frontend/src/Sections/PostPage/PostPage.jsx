@@ -6,6 +6,7 @@ import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import "./PostPage.css";
 import CommentsDrawer from "../../Components/CommentsDrawer/CommentsDrawer";
+import ToggleLike from "../../Api/PostsAPi/ToggleLike";
 
 export default function PostPage() {
 	const { id } = useParams();
@@ -28,6 +29,12 @@ export default function PostPage() {
 			}
 		}
 	}
+
+	async function callToggleLike() {
+		const data = await ToggleLike(id);
+		console.log(data);
+	}
+
 	React.useEffect(() => {
 		callGetSinglePost();
 		// this code will be replaced with some technology
@@ -67,9 +74,11 @@ export default function PostPage() {
 			<div className="actions">
 				<IconButton color="inherit" onClick={toggleDrawer(true)}>
 					<InsertCommentIcon />
+					<Typography variant="caption">{post.comments?.length}</Typography>
 				</IconButton>
-				<IconButton color="inherit">
+				<IconButton color="inherit" onClick={callToggleLike}>
 					<FavoriteIcon />
+					<Typography variant="caption">{post.likes?.length}</Typography>
 				</IconButton>
 			</div>
 			<CommentsDrawer
