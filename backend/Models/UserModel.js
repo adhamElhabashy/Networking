@@ -17,6 +17,13 @@ const userSchema = new mongoose.Schema({
 	confirmPassword: {
 		type: String,
 		required: [true, "please enter your password"],
+		validate: {
+			// this validator will only work for save and create
+			validator: function (val) {
+				return val == this.password;
+			},
+			message: "Password and confirm password doesn't match",
+		},
 	},
 	isAdmin: { type: Boolean, default: false },
 	profilePhoto: { type: String, default: "https://placehold.co/400" },
