@@ -59,3 +59,19 @@ module.exports.signIn = asyncHandler(async (request, response) => {
 	});
 	response.status(200).json({ status: "success", data: { user } });
 });
+
+/*---------------------------------
+* @desc sign out
+* @route /api/v1/auth/signout
+* @method POST
+* @access private - only logged in user
+-----------------------------------*/
+module.exports.signOut = asyncHandler(async (request, response) => {
+	response.clearCookie("authToken", {
+		httpOnly: true,
+		sameSite: "strict",
+	});
+	response
+		.status(200)
+		.json({ status: "success", message: "You signed out successfully" });
+});
