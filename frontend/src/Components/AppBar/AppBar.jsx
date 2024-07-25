@@ -10,9 +10,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AppBar.css";
 import useLocalStorage from "../../Hooks/useLocalStorage";
+import SignOut from "../../Api/AuthApi/SignOut";
 
 const settings = ["Account", "Saved", "Settings", "Logout"];
 
@@ -20,6 +21,12 @@ export default function AppBarComp() {
 	const [storageValue, setStorageValue] = useLocalStorage("profile");
 	const [isUser, setIsUser] = React.useState(false);
 	const [anchorElUser, setAnchorElUser] = React.useState(null);
+	const navigate = useNavigate();
+
+	async function callSignOut() {
+		const response = await SignOut();
+		navigate("/");
+	}
 
 	React.useEffect(() => {
 		if (storageValue) {
@@ -28,6 +35,13 @@ export default function AppBarComp() {
 			setIsUser(false);
 		}
 	}, [storageValue]);
+
+	function handleClick(e) {
+		if (e.currentTarget.id === "Logout") {
+			e.preventDefault();
+			callSignOut();
+		}
+	}
 
 	const handleOpenUserMenu = (event) => {
 		setAnchorElUser(event.currentTarget);
@@ -98,10 +112,17 @@ export default function AppBarComp() {
 								onClose={handleCloseUserMenu}
 							>
 								{settings.map((setting) => (
-									<MenuItem key={setting} onClick={handleCloseUserMenu}>
-										<Link to={`/${setting}`} className="link">
-											<Typography textAlign="center">{setting}</Typography>
-										</Link>
+									<MenuItem
+										key={setting}
+										component={Link}
+										to={`/${setting}`}
+										onClick={(e) => {
+											handleCloseUserMenu();
+											handleClick(e);
+										}}
+										id={setting}
+									>
+										<Typography textAlign="center">{setting}</Typography>
 									</MenuItem>
 								))}
 							</Menu>
