@@ -5,6 +5,7 @@ import "./Account.css";
 import { Link, useNavigate } from "react-router-dom";
 import GetPostsOfUser from "../../Api/UsersApi/GetPostsOfUser";
 import Post from "../../Components/Post/Post";
+import UpdateUserForm from "../../Components/UpdateUserForm/UpdateUserForm";
 
 export default function Account() {
 	const profile = JSON.parse(window.localStorage.getItem("profile"));
@@ -54,11 +55,9 @@ export default function Account() {
 							color={"secondary"}
 							className="user-info"
 						>
-							Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi
-							adipisci corporis id quae dignissimos nam pariatur, inventore odio
-							labore incidunt, quos accusamus nesciunt perspiciatis dolorum
-							cupiditate quod. At, praesentium nihil.
+							{profile?.user?.bio}
 						</Typography>
+						<UpdateUserForm />
 					</div>
 				</Box>
 				<div className="posts-box">
