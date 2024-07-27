@@ -14,6 +14,10 @@
 	margin: 15px 15px !important;
 }
 
+.delete-account-btn {
+	margin-left: 10px !important;
+}
+
 .account-info {
 	display: flex !important;
 	justify-content: flex-start;
