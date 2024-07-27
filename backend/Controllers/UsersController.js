@@ -82,6 +82,10 @@ module.exports.deleteUserProfile = asyncHandler(async (request, response) => {
 			message: "Not Allowed",
 		});
 	}
+	response.clearCookie("authToken", {
+		httpOnly: true,
+		sameSite: "strict",
+	});
 	await User.findByIdAndUpdate(id, { active: false });
 	// TODO: deleting all his Posts & comments in the database
 
