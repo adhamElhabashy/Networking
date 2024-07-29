@@ -3,18 +3,13 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import {
-	Avatar,
-	Box,
-	IconButton,
-	ListItemAvatar,
-	StepIcon,
-	TextField,
-} from "@mui/material";
+import { Avatar, Box, IconButton, ListItemAvatar } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddComment from "../AddComment/AddComment";
 import Edit from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import "./CommentsDrawer.css";
+import DeleteComment from "../../Api/CommentsApi/DeleteComment";
 
 export default function CommentsDrawer({
 	open,
@@ -25,6 +20,10 @@ export default function CommentsDrawer({
 	const user = JSON.parse(window.localStorage.getItem("profile")).user;
 	const [commentValue, setCommentValue] = React.useState("");
 	const [update, setUpdate] = React.useState(false);
+
+	async function callDeleteComment(id) {
+		const response = await DeleteComment(id);
+	}
 
 	const DrawerList = (
 		<Box sx={{ width: 300 }} role="presentation">
@@ -71,6 +70,13 @@ export default function CommentsDrawer({
 											<Edit />
 										</IconButton>
 									)}
+									<IconButton
+										onClick={() => {
+											callDeleteComment(comment._id);
+										}}
+									>
+										<DeleteIcon />
+									</IconButton>
 								</ListItem>
 							</>
 						) : (
