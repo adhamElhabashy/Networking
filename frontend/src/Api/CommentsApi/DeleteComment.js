@@ -1,0 +1,20 @@
+import axios from "axios";
+export default async function DeleteComment(id) {
+	try {
+		const response = await axios.delete(
+			`${import.meta.env.VITE_API_URL}/api/v1/comments/${id}`,
+			{
+				withCredentials: true,
+			}
+		);
+		const { data } = response.data;
+		return data;
+	} catch (error) {
+		const status = error.response ? error.response.status : null;
+		const message =
+			error.response && error.response.data
+				? error.response.data.message
+				: error.message;
+		throw { status, message };
+	}
+}
