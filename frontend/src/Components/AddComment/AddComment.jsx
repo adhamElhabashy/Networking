@@ -2,16 +2,32 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import CreateComment from "../../Api/CommentsApi/CreateComment";
+import upadteComment from "../../Api/CommentsApi/UpdateComment";
 
-export default function AddComment({ postId }) {
+export default function AddComment({ postId, commentValue, update }) {
 	const [text, setText] = React.useState("Add Comment");
+
+	React.useEffect(() => {
+		if (update) {
+			setText(commentValue.text);
+		} else {
+			setText("Add Comment");
+		}
+	}, [commentValue]);
 
 	async function callCreateComment() {
 		const response = await CreateComment(text, postId);
 	}
+	async function callUpdateComment() {
+		const response = await upadteComment(text, commentValue._id);
+	}
 
 	function handleSubmit(e) {
-		callCreateComment();
+		if (!update) {
+			callCreateComment();
+		} else {
+			callUpdateComment();
+		}
 	}
 
 	return (
