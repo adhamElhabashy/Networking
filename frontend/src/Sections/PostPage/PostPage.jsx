@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import GetSinglePost from "../../Api/PostsAPi/GetSinglePost";
 import { Box, Container, IconButton, Typography } from "@mui/material";
 import InsertCommentIcon from "@mui/icons-material/InsertComment";
@@ -53,7 +53,12 @@ export default function PostPage() {
 							alt={`${post.user?.username} photo`}
 						/>
 					</div>
-					<Typography variant="subtitle1" color={"secondary"}>
+					<Typography
+						component={Link}
+						to={`/profiles/${post.user?._id}`}
+						variant="subtitle1"
+						color={"secondary"}
+					>
 						{post.user?.username}
 					</Typography>
 				</div>

@@ -10,6 +10,7 @@ import Feed from "./Sections/Feed/Feed";
 import Account from "./Sections/Account/Account";
 import PostPage from "./Sections/PostPage/PostPage";
 import CreatePostPage from "./Sections/CreatePostPage/CreatePostPage";
+import UserAccountView from "./Sections/UserAccountView/UserAccountView";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -30,6 +31,7 @@ function App() {
 				<Route path="/account/posts/new" element={<CreatePostPage />} />
 				<Route path="/account/posts/edit/:id" element={<CreatePostPage />} />
 				<Route path="/posts/:id" element={<PostPage />} />
+				<Route path="/profiles/:id" element={<UserAccountView />} />
 			</Routes>
 		</ThemeProvider>
 	);
