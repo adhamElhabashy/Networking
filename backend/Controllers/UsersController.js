@@ -17,6 +17,19 @@ module.exports.getAllUsers = asyncHandler(async (request, response) => {
 });
 
 /*---------------------------------
+* @desc get user
+* @route /api/v1/users/:id
+* @method GET
+* @access private - only logged in user
+-----------------------------------*/
+module.exports.getUser = asyncHandler(async (request, response) => {
+	const { id } = request.params;
+	const user = await User.findById(id).select("-email");
+
+	response.status(200).json({ status: "success", data: { user } });
+});
+
+/*---------------------------------
 * @desc get all the posts of user
 * @route /api/v1/users/:id/posts
 * @method GET
