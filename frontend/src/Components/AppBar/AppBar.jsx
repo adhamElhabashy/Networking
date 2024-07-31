@@ -31,6 +31,10 @@ export default function AppBarComp() {
 	React.useEffect(() => {
 		if (storageValue) {
 			setIsUser(true);
+			if (JSON.parse(storageValue)) {
+				console.log(JSON.parse(storageValue).user.isAdmin);
+				settings.push("Dashboard");
+			}
 		} else {
 			setIsUser(false);
 		}
