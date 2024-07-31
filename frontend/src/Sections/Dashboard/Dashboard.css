@@ -1,0 +1,14 @@
+.dashboard-page {
+	min-height: 100vh !important;
+	width: 100%;
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+.app-resources {
+	margin-top: 20px !important;
+}
+
+.resource-btn {
+	width: 100% !important;
+	height: 100% !important;
+}
