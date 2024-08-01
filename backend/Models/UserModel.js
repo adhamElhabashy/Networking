@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
 	profilePhoto: { type: String, default: "https://placehold.co/400" },
 	bio: { type: String, minlength: 10 },
 	active: { type: Boolean, default: true },
-	accountVerified: { type: Boolean },
+	accountVerified: { type: Boolean, default: false },
 	passwordChangedAt: Date,
 	passwordResetToken: String,
 	passwordResetTokenExpires: Date,
