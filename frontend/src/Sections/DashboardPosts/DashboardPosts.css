@@ -1,0 +1,15 @@
+.dashboard-posts-box {
+	min-height: 100vh !important;
+	width: 100%;
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.dashboard-posts-grid {
+	width: 100%;
+}
+
+.dashboard-posts-item {
+	display: flex;
+	justify-content: center;
+}
