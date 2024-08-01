@@ -36,7 +36,9 @@ module.exports.getUser = asyncHandler(async (request, response) => {
 * @access private - only logged in user 
 -----------------------------------*/
 module.exports.getAllPostsOfUser = asyncHandler(async (request, response) => {
-	const posts = await Post.find({ user: request.params.id });
+	const posts = await Post.find({ user: request.params.id }).populate("user", [
+		"-password",
+	]);
 
 	response.status(200).json({ status: "success", data: { posts } });
 });
