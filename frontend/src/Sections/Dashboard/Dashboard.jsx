@@ -2,12 +2,8 @@ import * as React from "react";
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import "./Dashboard.css";
+import { Link } from "react-router-dom";
 
 const Item = styled(Paper)(({ theme }) => ({
 	textAlign: "center",
@@ -52,7 +48,9 @@ export default function Dashboard() {
 					</Grid>
 					<Grid item xs={6}>
 						<Item elevation={24}>
-							<Button className="resource-btn">Posts</Button>
+							<Button className="resource-btn" component={Link} to="posts">
+								Posts
+							</Button>
 						</Item>
 					</Grid>
 					<Grid item xs={6}>
