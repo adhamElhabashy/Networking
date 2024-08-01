@@ -12,12 +12,10 @@ import "./Post.css";
 import DeletePost from "../../Api/PostsAPi/DeletePost";
 import { useNavigate } from "react-router-dom";
 
-const options = ["Update", "Delete"];
-
 export default function Post({ post, className }) {
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
-	const profile = window.localStorage.getItem("profile");
+	const profile = JSON.parse(window.localStorage.getItem("profile"));
 	const navigate = useNavigate();
 
 	const handleClick = (event) => {
@@ -57,7 +55,7 @@ export default function Post({ post, className }) {
 			className={`${className} card`}
 		>
 			<CardActionArea href={`/posts/${post._id}`}>
-				{profile.user?._id === post.user._id && (
+				{profile.user?._id === post.user?._id || profile.user?.isAdmin ? (
 					<Box className="menu-container">
 						<IconButton
 							aria-label="more"
@@ -79,18 +77,20 @@ export default function Post({ post, className }) {
 							onClose={handleClose}
 							className="post-menu"
 						>
-							{options.map((option) => (
-								<MenuItem
-									key={option}
-									onClick={handleMenuItemClick}
-									id={option}
-								>
-									{option}
+							{/* {options.map((option) => (
+								
+							))} */}
+							{profile.user?._id === post.user?._id && (
+								<MenuItem onClick={handleMenuItemClick} id={"Update"}>
+									Update
 								</MenuItem>
-							))}
+							)}
+							<MenuItem onClick={handleMenuItemClick} id={"Delete"}>
+								Delete
+							</MenuItem>
 						</Menu>
 					</Box>
-				)}
+				) : null}
 				<CardMedia
 					component="img"
 					height="140"
