@@ -57,7 +57,9 @@ export default function Dashboard() {
 					</Grid>
 					<Grid item xs={6}>
 						<Item elevation={24}>
-							<Button className="resource-btn">Comments</Button>
+							<Button className="resource-btn" component={Link} to="comments">
+								Comments
+							</Button>
 						</Item>
 					</Grid>
 				</Grid>

@@ -14,6 +14,7 @@ import UserAccountView from "./Sections/UserAccountView/UserAccountView";
 import Dashboard from "./Sections/Dashboard/Dashboard";
 import DashboardPosts from "./Sections/DashboardPosts/DashboardPosts";
 import DashboardOfUsers from "./Sections/DashboardOfUsers/DashboardOfUsers";
+import DashboardOfComments from "./Sections/DashboardOfComments/DashboardOfComments";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -38,6 +39,7 @@ function App() {
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dashboard/posts" element={<DashboardPosts />} />
 				<Route path="/dashboard/users" element={<DashboardOfUsers />} />
+				<Route path="/dashboard/comments" element={<DashboardOfComments />} />
 			</Routes>
 		</ThemeProvider>
 	);
