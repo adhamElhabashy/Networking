@@ -13,6 +13,7 @@ import CreatePostPage from "./Sections/CreatePostPage/CreatePostPage";
 import UserAccountView from "./Sections/UserAccountView/UserAccountView";
 import Dashboard from "./Sections/Dashboard/Dashboard";
 import DashboardPosts from "./Sections/DashboardPosts/DashboardPosts";
+import DashboardOfUsers from "./Sections/DashboardOfUsers/DashboardOfUsers";
 
 let theme = createTheme({
 	palette: { primary: { main: "#0099FF" }, secondary: { main: "#fff" } },
@@ -36,6 +37,7 @@ function App() {
 				<Route path="/profiles/:id" element={<UserAccountView />} />
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="/dashboard/posts" element={<DashboardPosts />} />
+				<Route path="/dashboard/users" element={<DashboardOfUsers />} />
 			</Routes>
 		</ThemeProvider>
 	);

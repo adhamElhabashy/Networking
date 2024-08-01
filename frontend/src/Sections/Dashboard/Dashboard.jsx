@@ -43,7 +43,9 @@ export default function Dashboard() {
 				<Grid container spacing={2} className="app-resources">
 					<Grid item xs={12}>
 						<Item elevation={24}>
-							<Button className="resource-btn">Users</Button>
+							<Button className="resource-btn" component={Link} to="users">
+								Users
+							</Button>
 						</Item>
 					</Grid>
 					<Grid item xs={6}>
