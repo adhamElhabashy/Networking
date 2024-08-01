@@ -1,0 +1,15 @@
+.dashboard-comments-box {
+	min-height: 100vh !important;
+	width: 100%;
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.comment {
+	position: relative;
+}
+
+.comments-menu-container {
+	position: absolute !important;
+	right: 0 !important;
+}
