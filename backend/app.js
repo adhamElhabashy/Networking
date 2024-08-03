@@ -24,4 +24,12 @@ app.use("/api/v1/users", UsersRouter);
 app.use("/api/v1/posts", PostsRouter);
 app.use("/api/v1/comments", CommentsRouter);
 
+app.all("*", (request, response, next) => {
+	response
+		.status(404)
+		.json({
+			status: "fail",
+			message: `can't find ${request.originalUrl} on the server`,
+		});
+});
 module.exports = app;
