@@ -6,6 +6,8 @@ const PostsRouter = require("./Routes/PostsRoute");
 const CommentsRouter = require("./Routes/CommentsRoute");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const CustomError = require("./Utils/CustomError");
+const ErrorController = require("./Controllers/ErrorController");
 const app = express();
 
 app.use(express.json());
@@ -25,11 +27,11 @@ app.use("/api/v1/posts", PostsRouter);
 app.use("/api/v1/comments", CommentsRouter);
 
 app.all("*", (request, response, next) => {
-	response
-		.status(404)
-		.json({
-			status: "fail",
-			message: `can't find ${request.originalUrl} on the server`,
-		});
+	const err = new CustomError(
+		`can't find ${request.originalUrl} on the server`,
+		404
+	);
+	next(err);
 });
+app.use(ErrorController);
 module.exports = app;
