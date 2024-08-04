@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Post = require("../Models/PostModel");
+const CustomError = require("../Utils/CustomError");
 
 const filterRequestObject = require("../Functions/FilterRequestObject");
 
@@ -49,7 +50,7 @@ module.exports.getAllThePosts = asyncHandler(async (request, response) => {
 * @method GET
 * @access private (only admin)
 -----------------------------------*/
-module.exports.getSinglePost = asyncHandler(async (request, response) => {
+module.exports.getSinglePost = asyncHandler(async (request, response, next) => {
 	const post = await Post.findById(request.params.id)
 		.populate("user", ["-password"])
 		.populate({
@@ -61,7 +62,9 @@ module.exports.getSinglePost = asyncHandler(async (request, response) => {
 		});
 
 	if (!post) {
-		response.status(404).json({ status: "fail", message: "post not found" });
+		// response.status(404).json({ status: "fail", message: "post not found" });
+		const error = new CustomError("post not found", 404);
+		return next(error);
 	}
 
 	response.status(200).json({ status: "success", data: { post } });
@@ -93,17 +96,18 @@ module.exports.updateMyPost = asyncHandler(async (request, response) => {
 * @method DELETE
 * @access private (only signed in user or admin)
 -----------------------------------*/
-module.exports.deleteProfile = asyncHandler(async (request, response) => {
+module.exports.deleteProfile = asyncHandler(async (request, response, next) => {
 	const post = await Post.findOne({ _id: request.params.id });
 
 	if (
 		request.user.isAdmin !== true &&
 		request.user.id !== post.user.toString()
 	) {
-		response.status(403).json({
-			status: "fail",
-			message: "Not Allowed. only the user or admin can delete the post",
-		});
+		const error = new CustomError(
+			"Not Allowed. only the user or admin can delete the post",
+			403
+		);
+		return next(error);
 	}
 
 	await Post.findByIdAndDelete(request.params.id);
@@ -117,13 +121,14 @@ module.exports.deleteProfile = asyncHandler(async (request, response) => {
 * @method PUT
 * @access private (only logged in user)
 -----------------------------------*/
-module.exports.toggleLike = asyncHandler(async (request, response) => {
+module.exports.toggleLike = asyncHandler(async (request, response, next) => {
 	const loggedInUser = request.user.id;
 	const { id: postID } = request.params;
 	let post = await Post.findById(postID);
 
 	if (!post) {
-		response.status(404).json({ status: "fail", message: "post not found" });
+		const error = new CustomError("post not found", 404);
+		return next(error);
 	}
 
 	const isPostAlreadyLiked = post.likes.find(

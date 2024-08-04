@@ -2,6 +2,7 @@ const Comment = require("../Models/CommentModel");
 const asyncHandler = require("express-async-handler");
 const User = require("../Models/UserModel");
 const FilterRequestObject = require("../Functions/FilterRequestObject");
+const CustomError = require("../Utils/CustomError");
 
 /*---------------------------------
 * @desc get All the comments
@@ -60,17 +61,18 @@ module.exports.updateComment = asyncHandler(async (request, response) => {
 * @method DELETE
 * @access private (only admin or logged in user)
 -----------------------------------*/
-module.exports.deleteComment = asyncHandler(async (request, response) => {
+module.exports.deleteComment = asyncHandler(async (request, response, next) => {
 	const comment = await Comment.findById(request.params.id);
 
 	if (
 		request.user.isAdmin !== true &&
 		request.user.id !== comment.user.toString()
 	) {
-		response.status(403).json({
-			status: "fail",
-			message: "Not Allowed. only the user or admin can delete the post",
-		});
+		const error = new CustomError(
+			"Not Allowed. only the user or admin can delete the post",
+			403
+		);
+		return next(error);
 	}
 
 	await Comment.findByIdAndDelete(request.params.id);

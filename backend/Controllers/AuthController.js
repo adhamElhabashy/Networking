@@ -2,6 +2,7 @@ const User = require("../Models/UserModel");
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const CustomError = require("../Utils/CustomError");
 
 /*---------------------------------
 * @desc sign up New User 
@@ -10,7 +11,7 @@ const bcrypt = require("bcryptjs");
 * @access public
 -----------------------------------*/
 module.exports.signUp = asyncHandler(async (request, response) => {
-	User.create(request.body);
+	await User.create(request.body);
 
 	return response
 		.status(201)
@@ -23,13 +24,12 @@ module.exports.signUp = asyncHandler(async (request, response) => {
 * @method POST
 * @access public
 -----------------------------------*/
-module.exports.signIn = asyncHandler(async (request, response) => {
+module.exports.signIn = asyncHandler(async (request, response, next) => {
 	let { email, password } = request.body;
 	// 1 - check if the email and password provided
 	if (!email || !password) {
-		return response
-			.status(401)
-			.json({ message: "please provide email and password" });
+		const error = new CustomError("please provide email and password", 401);
+		return next(error);
 	}
 
 	let user = await User.findOne({ email: email }).select("+password");
@@ -37,9 +37,8 @@ module.exports.signIn = asyncHandler(async (request, response) => {
 	// 2 - Check if the user exists
 	// 3 - check if there the email and password correct
 	if (!user || !(await bcrypt.compare(password, user.password))) {
-		return response
-			.status(401)
-			.json({ message: "Email or password is not correct" });
+		const error = new CustomError("Email or password is not correct", 401);
+		return next(error);
 	}
 
 	user.password = undefined;
