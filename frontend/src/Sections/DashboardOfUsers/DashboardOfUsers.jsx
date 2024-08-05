@@ -31,6 +31,12 @@ export default function DashboardOfUsers() {
 					}}
 					pageSizeOptions={[5, 10, 20]}
 					checkboxSelection
+					sx={{
+						"& .MuiCheckbox-root.Mui-checked:not(.MuiCheckbox-indeterminate) svg":
+							{
+								backgroundColor: "secondary.main",
+							},
+					}}
 				/>
 			</Container>
 		</Box>
