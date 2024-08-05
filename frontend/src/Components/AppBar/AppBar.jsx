@@ -8,7 +8,6 @@ import ButtonComp from "../ButtonComp/ButtonComp";
 import Tooltip from "@mui/material/Tooltip";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
 import Avatar from "@mui/material/Avatar";
 import { Link, useNavigate } from "react-router-dom";
 import "./AppBar.css";
@@ -142,15 +141,6 @@ export default function AppBarComp() {
 							</Menu>
 						</Box>
 					)}
-					<IconButton
-						size="large"
-						edge="start"
-						color="inherit"
-						aria-label="menu"
-						sx={{ mr: 2 }}
-					>
-						<MenuIcon fontSize="large" />
-					</IconButton>
 				</Toolbar>
 			</AppBar>
 		</Box>
