@@ -112,3 +112,19 @@ module.exports.deleteUserProfile = asyncHandler(
 		response.status(204).json({ status: "success", data: null });
 	}
 );
+
+/*---------------------------------
+* @desc profile photo upload
+* @route /api/v1/users/profile-photo-upload
+* @method POST
+* @access private - only logged in user
+-----------------------------------*/
+module.exports.profilePhotoUpload = asyncHandler(
+	async (request, response, next) => {
+		if (!request.file) {
+			const error = new CustomError("no file provided", 400);
+			next(error);
+		}
+		response.status(200).json({ message: "Uploaded" });
+	}
+);
